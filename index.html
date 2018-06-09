@@ -40,6 +40,7 @@
             }
         </style>
 
+        <script src="seedrandom.js"></script>
         <script>
             var theories = [
                 "[c] will kill [c] in cold blood.",
@@ -64,7 +65,7 @@
                 "[c] and [c] will hold hands.",
                 "[c], [c] and [c] will be permakilled on the next EoA.",
                 "[c] is actually [c] and [c] in a trenchcoat.",
-                "the endgame party will be comprised by [c], [c], [c] and [c].",
+                "the endgame party will be comprised of [c], [c], [c] and [c].",
                 "[c] and [c] will fuse and form [c].",
                 "[c] will throw [i] into Redtulip Town's well for a wish.",
                 "[c] will be brought back from death by [c].",
@@ -153,35 +154,48 @@
             }
 
 
-            function roll() {
-                shuffle(theories);
-                shuffle(characters);
-                shuffle(items);
-                shuffle(locations);
+            function roll_seeded(seed) {
+                Math.seedrandom(seed);
 
-                var theory = theories[0];
+                var ts = shuffle(theories.slice());
+                var cs = shuffle(characters.slice());
+                var iss = shuffle(items.slice());
+                var ls = shuffle(locations.slice());
+
+                var theory = ts[0];
 
                 var c = theory.split("[c]");
                 theory = c[0];
                 for (var q = 1; q < c.length; ++q) {
-                    theory += characters[q-1] + c[q];
+                    theory += cs[q-1] + c[q];
                 }
 
                 var i = theory.split("[i]");
                 theory = i[0];
                 for (var q = 1; q < i.length; ++q) {
-                    theory += items[q-1] + i[q];
+                    theory += iss[q-1] + i[q];
                 }
 
                 var l = theory.split("[l]");
                 theory = l[0];
                 for (var q = 1; q < l.length; ++q) {
-                    theory += locations[q-1] + l[q];
+                    theory += lss[q-1] + l[q];
                 }
 
                 theory = theory.charAt(0).toUpperCase() + theory.slice(1);
                 document.getElementById("theory").textContent = theory;
-            };
+            }
+
+            function roll() {
+                Math.seedrandom();
+                var seed = Math.floor(Math.random() * 2147483648.);
+                roll_seeded(seed);
+                history.pushState(null, null, "#"+seed);
+            }
+
+            window.addEventListener("hashchange", function(e) {
+                roll_seeded(parseInt(window.location.hash.substr(1)));
+            });
         </script>
     </head>
     <body>
@@ -189,12 +203,20 @@
         <div id="container">
             <div id="theory">
             </div>
-            <button id="roll" onclick="roll()">roll</button>
+            <div id="buttons">
+                <button id="roll" onclick="roll();">roll</button>
+            </div>
         </div>
         <div id="footer">
             <a href="https://github.com/difarem/oceanfalls-crack-theory-generator">Oceanfalls crack theory generator</a> by <a href="https://github.com/difarem">Difarem</a>
         </div>
 
-        <script>roll();</script>
+        <script>
+            if (window.location.hash) {
+                roll_seeded(parseInt(window.location.hash.substr(1)));
+            } else {
+                roll();
+            }
+        </script>
     </body>
 </html>
