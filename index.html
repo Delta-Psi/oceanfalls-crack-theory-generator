@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>oceanfalls crack theory generator</title>
+
+        <style>
+            @font-face {
+                font-family: "press start";
+                src: url(PrStart.ttf);
+            }
+
+            body {
+                background-color: #172f48;
+                color: #fdef7b;
+                font-family: "press start";
+
+                text-align: center;
+            }
+
+            #spacer {
+                margin-bottom: 10%;
+            }
+
+            #theory {
+                background-color: #000;
+                border-style: solid;
+                border-width: 6px;
+                border-color: #374e76;
+                padding: 12px 12px 12px 12px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 60%;
+                float: center;
+            }
+        </style>
+
+        <script>
+            var theories = [
+                "[c] will kill [c] in cold blood.",
+                "[c] will travel back in time and become [c].",
+                "[c] is actually just [c] in disguise.",
+                "[c] is [c]'s child.",
+                "[c] and [c]'s final showdown will take place in [l].",
+                "the secret to defeating [c] lies in [i].",
+                "[c]'s arc is a metaphor for the Obama presidency.",
+                "[c] is the real mastermind behind the war.",
+                "[c]'s endgame ship is with [c].",
+                "[c] and [c] will team up to defeat [c] once and for all.",
+                "[c] will finally snap because of [i].",
+                "the dome barrier is held together by [i].",
+                "[c] will join the maids at Reds' Inn.",
+                "[c] will attempt to eat [i] and choke.",
+            ];
+
+            var characters = [
+                "Nino",
+                "Aria",
+                "Maya",
+                "Jotaro girl",
+                "buttgirl",
+                "Sis",
+                "the human prince",
+                "Kotori",
+                "Solis",
+                "Suvillan",
+                "Gula",
+                "Avaritia",
+                "Ira",
+                "Acedia",
+                "Invidia",
+                "Superbia",
+                "Luxuria",
+                "Corona",
+                "Ludwig",
+                "Nino's mother",
+                "Nino's father",
+                "the gem seller",
+            ];
+
+            var items = [
+                "the lantern",
+                "Nino's sword",
+                "the crate on the dead forest",
+                "the yellow flowers",
+                "Five's flower crown",
+                "Aria's bow",
+                "Kotori's spear",
+                "Rigmarole of Oshen",
+                "Nino's healing hands",
+                "Aria's illusions",
+                "Corona's chains",
+                "Solis' headband",
+                "the human prince's hair",
+                "Aria's muffins",
+                "Aria's tea",
+                "the moon",
+                "Aria's ass",
+            ];
+            var locations = [
+                "the forest",
+                "Redtulip Town",
+                "Suvillan's tower",
+                "the library",
+                "Heavenly Treats",
+                "G. E. M.",
+                "Reds' Inn",
+                "the graveyard",
+                "Aria's house",
+            ];
+
+            // stolen from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+            }
+
+
+            function roll() {
+                shuffle(theories);
+                shuffle(characters);
+                shuffle(items);
+                shuffle(locations);
+
+                var theory = theories[0];
+
+                var c = theory.split("[c]");
+                theory = c[0];
+                for (var q = 1; q < c.length; ++q) {
+                    theory += characters[q-1] + c[q];
+                }
+
+                var i = theory.split("[i]");
+                theory = i[0];
+                for (var q = 1; q < i.length; ++q) {
+                    theory += items[q-1] + i[q];
+                }
+
+                var l = theory.split("[l]");
+                theory = l[0];
+                for (var q = 1; q < l.length; ++q) {
+                    theory += locations[q-1] + l[q];
+                }
+
+                theory = theory.charAt(0).toUpperCase() + theory.slice(1);
+                document.getElementById("theory").textContent = theory;
+            };
+        </script>
+    </head>
+    <body>
+        <div id="spacer"></div>
+        <div id="container">
+            <div id="theory">
+            </div>
+            <button id="roll" onclick="roll()">roll</button>
+        </div>
+
+        <script>roll();</script>
+    </body>
+</html>
