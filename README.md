@@ -1,4 +1,4 @@
 # Oceanfalls crack theory generator
-By Difarem.
+By DeltaPsi.
 
-[Live version](https://difarem.github.io/oceanfalls-crack-theory-generator).
+[Live version](https://delta-psi.github.io/oceanfalls-crack-theory-generator).
