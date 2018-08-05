@@ -74,6 +74,7 @@
                 "Nino will fall underground and meet [c].",
                 "Nino will fall underground and crush [c].",
                 "[i] can only be destroyed with [i].",
+                "It is a little known fact that [c] watches [a].",
             ];
 
             var characters = [
@@ -134,6 +135,32 @@
                 "Aria's house",
                 "the underground",
             ];
+            var animes = [
+                "Jojo's Bizarre Adventure",
+                "Love Live!",
+                "Tokyo Ghoul",
+                "Death Note",
+                "Mirai Nikki",
+                "Fullmetal Alchemist",
+                "Pingu in the city",
+                "Cory in the house",
+                "Little Witch Academia",
+                "Boku no Hero Academia",
+                "Kill la Kill",
+                "Evangelion",
+                "Gurren Lagann",
+                "Madoka Magica",
+                "Sailor Moon",
+                "Sword Art Online",
+                "Steins;Gate",
+                "Eromanga Sensei",
+                "Monster Musume",
+                "Boku no Pico",
+                "Kobayashi-san Chi no Maid Dragon",
+                "Bakemonogatari",
+                "Youjo Senki",
+                "Made in Abyss",
+            ];
 
             // stolen from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
             function shuffle(array) {
@@ -163,6 +190,7 @@
                 var cs = shuffle(characters.slice());
                 var iss = shuffle(items.slice());
                 var ls = shuffle(locations.slice());
+                var ass = shuffle(animes.slice());
 
                 var theory = ts[0];
 
@@ -182,6 +210,12 @@
                 theory = l[0];
                 for (var q = 1; q < l.length; ++q) {
                     theory += lss[q-1] + l[q];
+                }
+
+                var a = theory.split("[a]");
+                theory = a[0];
+                for (var q = 1; q < a.length; ++q) {
+                    theory += ass[q-1] + a[q];
                 }
 
                 theory = theory.charAt(0).toUpperCase() + theory.slice(1);
@@ -210,7 +244,7 @@
             </div>
         </div>
         <div id="footer">
-            <a href="https://github.com/difarem/oceanfalls-crack-theory-generator">Oceanfalls crack theory generator</a> by <a href="https://github.com/difarem">Difarem</a>
+            <a href="https://github.com/delta-psi/oceanfalls-crack-theory-generator">Oceanfalls crack theory generator</a> by <a href="https://github.com/delta-psi">DeltaPsi</a>
         </div>
 
         <script>
